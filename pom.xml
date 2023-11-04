@@ -17,6 +17,7 @@
     </dependencies>
     <modules>
         <module>ngraph-lib</module>
+        <module>ngraph-core</module>
     </modules>
     
     <properties>
