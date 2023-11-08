@@ -1,3 +1,6 @@
 [submodule "ngraph-lib"]
 	path = ngraph-lib
 	url = git@github.com:nishisan/ngraph-lib.git
+[submodule "ngraph-core"]
+	path = ngraph-core
+	url = git@github-nishi:nishisan/ngraph-core.git
