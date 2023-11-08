@@ -24,6 +24,7 @@ import dev.nishisan.graph.impl.StringGraph;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicLong;
@@ -41,7 +42,7 @@ public class DfsBasicStringGraphStressTest {
         /**
          * Initiate interface
          */
-        IGraph<String,StringVertex,StringEdge> graph = new StringGraph();
+        IGraph<String, StringVertex, StringEdge> graph = new StringGraph();
 
         int levels = 3;         // Número de níveis no grafo
         int nodesPerLevel = 4;  // Nós por nível
@@ -82,18 +83,35 @@ public class DfsBasicStringGraphStressTest {
 //        graph.getProvider().
         Map<Integer, Boolean> s = new ConcurrentHashMap<>();
         graph.getProvider().getEdges().forEach(e -> {
-            if (s.containsKey(e.hashCode())){
+            if (s.containsKey(e.hashCode())) {
                 System.out.println("Duplicated");
                 System.out.println("Hash:" + e.hashCode());
-            }else{
+            } else {
                 s.put(e.hashCode(), true);
             }
-            
+
         });
         System.out.println("Running DFS...");
-        graph.dfs(firstNode, 0, 4).forEach(a -> {
-            total.incrementAndGet();
-        });
+        Random rand = new Random();
+
+
+
+        for (int x = 0; x < 40; x++) {
+            total.set(0);
+            System.out.println("["+x+"] - Trying :" + x);
+            Long start = System.currentTimeMillis();
+            int randomThreadCount = rand.nextInt(4) + 1;
+            System.out.println("["+x+"] - Trying :" + x + " With:" + randomThreadCount + " Threads");
+            
+            graph.dfs(firstNode, 0, 2).forEach(a -> {
+                total.incrementAndGet();
+            });
+            Long end = System.currentTimeMillis();
+            Long took = end - start;
+            System.out.println("["+x+"] - Found.." + total.get() + " in:" + took + " ms");
+            System.out.println("["+x+"] - Max Queue Usage.." + graph.getMaxQueueUsage());
+            System.out.println("---------------------------------------------------------");
+        }
 
 //        graph.dfs(firstNode).forEach(a -> {
 //            total.incrementAndGet();
@@ -101,9 +119,7 @@ public class DfsBasicStringGraphStressTest {
         /**
          * .88284 é o esperado para 3L 4N nodes
          */
-        System.out.println("Found.." + total.get());
-        System.out.println("Max Queue Usage.." + graph.getMaxQueueUsage());
-
+//        Thread.sleep(1000 * 60);
     }
 
 }
