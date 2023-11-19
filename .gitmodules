@@ -3,4 +3,7 @@
 	url = git@github.com:nishisan/ngraph-lib.git
 [submodule "ngraph-core"]
 	path = ngraph-core
-	url = git@github-nishi:nishisan/ngraph-core.git
+	url = git@github.com:nishisan/ngraph-core.git
+[submodule "java-velocypack"]
+	path = java-velocypack
+	url = git@github.com:nishisan/java-velocypack.git

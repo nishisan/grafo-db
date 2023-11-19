@@ -18,6 +18,7 @@
     <modules>
         <module>ngraph-lib</module>
         <module>ngraph-core</module>
+        <module>ngraph-storage</module>
     </modules>
     
     <properties>
