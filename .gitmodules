@@ -4,6 +4,9 @@
 [submodule "ngraph-core"]
 	path = ngraph-core
 	url = git@github.com:nishisan/ngraph-core.git
+[submodule "ngraph-storage"]
+    path = ngraph-storage
+    url = git@github.com:nishisan/ngraph-storage.git
 [submodule "java-velocypack"]
 	path = java-velocypack
 	url = git@github.com:nishisan/java-velocypack.git
